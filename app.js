@@ -13,6 +13,7 @@
 const app = require('express')();
 
 // Fake posts to simulate a database
+// In real life, you will be extracting data from database software and create an object like this
 const posts = [
   {
     id: 1,
