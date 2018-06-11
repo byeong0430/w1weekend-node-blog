@@ -41,7 +41,11 @@ const posts = [
   app.set(name, value) assigns setting name to value
   You can retrieve the value by app.get(name)
 */
-  // Set the view engine to ejs
+// Set the view engine to ejs
+/*
+  We use app.set('view engine', 'ejs') to tell express to use EJS as our templating engine
+  Express will automatically look inside the views/ folder for template files
+*/
 app.set('view engine', 'ejs');
 // console.log(app.get('view engine'));
 
@@ -52,31 +56,38 @@ app.set('view engine', 'ejs');
 */
 // 1. Blog homepage
 app.get('/', (req, res) => {
-  // Render 'home.ejs' with the list of posts
   /*
     app.render(view, [locals], callback)
-    returns the rendered HTML of a view via the callback function
-    In the example below, 'home' is assigned to the root dir and {posts: posts} is the object that's passed to /
+    method used to render the view we pass it and send the HTML to the client.
+    
+    When the user visits the homepage ('/'), we want to render the home.ejs template
+    and pass in an object ({posts: posts}) to the render method to make it available 
+    for the home.ejs template to use.
+
+    Note: 'views/' and '.ejs' are omitted. Thus 'home' means 'views/home.ejs'
   */
-  res.render('home', {
-    posts: posts
-  });
+  // Render 'home.ejs' with the list of posts
+  let obj = {posts: posts};
+  res.render('home', obj);
 });
 
 // 2. Blog post
 app.get('/post/:id', (req, res) => {
-  // posts object is passed from app.get('/')
-  // Find the post in the 'posts' array
+  /* 
+    Render pages like /post/1 to post.ejs.
+  */
   const post = posts.filter(post => {
-    return post.id === req.params.id;
+    return post.id == req.params.id;
   })[0];
-
+  // console.log(post);
+  
   // Render the 'post.ejs' template with the post content
-  res.render('post', {
+  let obj = {
     author: post.author,
     title: post.title,
     body: post.body
-  });
+  };
+  res.render('post', obj);
 });
 
 app.listen(8080);

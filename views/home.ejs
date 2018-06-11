@@ -27,7 +27,13 @@
         <div class='col-lg-12'>
           <div class='list-group'>
             <!-- loop over blog posts and render them -->
-            LIST_OF_POSTS
+            <% posts.forEach(post => { %>
+              <!-- <%= %> is used to output JS variables -->
+              <a href='post/<%= post.id %>' class='list-groupitem'>
+                <h4 class='list-group-item-heading'><%= post.title %></h4>
+                <p class='list-group-item-text'><%= post.author %></p>
+              </a>
+            <% }) %>
           </div>
         </div>
       </div>
