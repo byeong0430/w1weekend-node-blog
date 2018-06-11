@@ -1,5 +1,8 @@
 /* app.js */
-
+/* 
+  Make sure you download express and ejs npm modules by running
+  'npm install --save express ejs'
+*/
 /* 
   Require and instantiate express module downloaded via npm 
   require('express')() is the same as the code block below:
