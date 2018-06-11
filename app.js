@@ -43,16 +43,29 @@ const posts = [
 */
   // Set the view engine to ejs
 app.set('view engine', 'ejs');
-console.log(app.get('view engine'));
+// console.log(app.get('view engine'));
 
+/*
+  req: request object containing information about the HTTP request that raised the event
+  res: response object to send back the desired HTTP response
+  Note: You cannot send request to the root directory (/)
+*/
 // 1. Blog homepage
 app.get('/', (req, res) => {
   // Render 'home.ejs' with the list of posts
-  res.render('home', {posts: posts})
+  /*
+    app.render(view, [locals], callback)
+    returns the rendered HTML of a view via the callback function
+    In the example below, 'home' is assigned to the root dir and {posts: posts} is the object that's passed to /
+  */
+  res.render('home', {
+    posts: posts
+  });
 });
 
 // 2. Blog post
 app.get('/post/:id', (req, res) => {
+  // posts object is passed from app.get('/')
   // Find the post in the 'posts' array
   const post = posts.filter(post => {
     return post.id === req.params.id;
@@ -66,6 +79,6 @@ app.get('/post/:id', (req, res) => {
   });
 });
 
-// app.listen(8080);
+app.listen(8080);
 
-// console.log('Listening on port 8080');
+console.log('Listening on port 8080');
