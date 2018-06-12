@@ -59,6 +59,7 @@ app.set('view engine', 'ejs');
   Note: You cannot send request to the root directory (/)
 */
 // 1. Blog homepage
+// app.get() is triggered as a client sends a root (/) request.
 app.get('/', (req, res) => {
   /*
     app.render(view, [locals], callback)
