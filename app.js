@@ -77,6 +77,7 @@ app.get('/', (req, res) => {
 });
 
 // 2. Blog post
+// Colon(:) refers to url parameters. Any returned :parameters are accessed by req.params.<paramName>
 app.get('/post/:id', (req, res) => {
   /* 
     Render pages like /post/1 to post.ejs.
